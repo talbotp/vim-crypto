@@ -48,7 +48,11 @@ function! VCPing()
    python3 crypto.ping()
 endfunction
 
-function! VCPrice(asset_name)
-    execute "python3 crypto.price(\"" . a:asset_name . "\")"
+function! VCName(asset_ticker)
+    execute "python3 crypto.ticker_to_name(\"" . a:asset_ticker . "\")"
+endfunction
+
+function! VCPrice(asset_ticker)
+    execute "python3 crypto.price(\"" . a:asset_ticker . "\")"
 endfunction
 
