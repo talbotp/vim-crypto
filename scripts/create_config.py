@@ -31,7 +31,7 @@ while max_number_of_markets != 0:
         market_iter    = iter(response_json)
         current_market = next(market_iter)
         
-    current_symbol = current_market['symbol']
+    current_symbol = current_market['symbol'].lower()    # Lower case in contract.
     current_id     = current_market['id']
         
     if max_number_of_markets == 1:
