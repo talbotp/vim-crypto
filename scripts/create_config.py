@@ -43,6 +43,11 @@ while max_number_of_markets != 0:
     print(entry)
     max_number_of_markets -= 1
 
+
+# Add other bits to the config (not related to the price data.)
+config_file.write("TICKER  = 'ticker'\n")
+config_file.write("NAME    = 'name'\n")
+
 # Close our updated config file.
 config_file.close()
 

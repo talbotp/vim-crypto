@@ -1,33 +1,41 @@
-" Cancel setup if python3 is not available.
+"" Cancel setup if python3 is not available.
 if !has("python3")
     echo "vim has to be compiled with python3 for vim-crypto to run, vim-crypto is disabled."
     finish
 endif
 
-" Cancel setup if its already been ran.
+"" Cancel setup if its already been ran.
 if exists('g:vim_crypto_plugin_loaded')
     finish
 endif
 let g:vim_crypto_plugin_loaded = 1
 
 
-" Setup variables which can be changed in vimrc
+"" Setup variables which can be changed in vimrc
 
-" The url used to get price data.
+"" The url used to get price data.
 if exists('g:default_price_url')
     let g:price_url = g:default_price_url
 else
     let g:price_url = 'https://api.coingecko.com/api/v3'
 endif 
 
-" The default currency to be used
+"" The currency to be used for price checks etc.
 if exists('g:default_vs_currency')
     let g:vs_currency = g:default_vs_currency
 else 
     let g:vs_currency = 'usd'
 endif
 
-" Notify vim's python interpreter where our python code lives.
+"" The default input to be used when fetching prices, ie ticker vs asset name.
+" Options are 'ticker' or 'name
+if exists('g:default_vc_user_input')
+    let g:vc_user_input = g:default_vc_user_input
+else
+    let g:vc_user_input = 'ticker'
+endif
+
+"" Notify vim's python interpreter where our python code lives.
 let s:plugin_root_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 python3 << EOF
@@ -49,10 +57,10 @@ function! VCPing()
 endfunction
 
 function! VCName(asset_ticker)
-    execute "python3 crypto.ticker_to_name(\"" . a:asset_ticker . "\")"
+    execute "python3 crypto.print_name(\"" . a:asset_ticker . "\")"
 endfunction
 
-function! VCPrice(asset_ticker)
-    execute "python3 crypto.price(\"" . a:asset_ticker . "\")"
+function! VCPrice(asset)
+    execute "python3 crypto.print_price(\"" . a:asset . "\")"
 endfunction
 
