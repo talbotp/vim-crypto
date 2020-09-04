@@ -14,25 +14,26 @@ let g:vim_crypto_plugin_loaded = 1
 "" Setup variables which can be changed in vimrc
 
 "" The url used to get price data.
-if exists('g:default_price_url')
-    let g:price_url = g:default_price_url
-else
-    let g:price_url = 'https://api.coingecko.com/api/v3'
+if !exists('g:vc_price_url')
+    let g:vc_price_url = 'https://api.coingecko.com/api/v3'
 endif 
 
 "" The currency to be used for price checks etc.
-if exists('g:default_vs_currency')
-    let g:vs_currency = g:default_vs_currency
-else 
-    let g:vs_currency = 'usd'
+if !exists('g:vc_vs_currency') 
+    let g:vc_vs_currency = 'usd'
 endif
 
 "" The default input to be used when fetching prices, ie ticker vs asset name.
 " Options are 'ticker' or 'name
-if exists('g:default_vc_user_input')
-    let g:vc_user_input = g:default_vc_user_input
-else
+if !exists('g:vc_user_input')
     let g:vc_user_input = 'ticker'
+endif
+
+"" Command for fetching the price of a single asset.
+if !exists('g:vc_price_command')
+    command! -nargs=* Vcp :call VCPrice(<q-args>)
+else 
+    execute "command! -nargs=* ". g:vc_price_command. " :call VCPrice(<q-args>)"
 endif
 
 "" Notify vim's python interpreter where our python code lives.

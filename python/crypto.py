@@ -49,8 +49,8 @@ def _get_query_id(asset):
         raise ValueError("Invalid user_input = ", vc_user_input, ", should be set to ", config.TICKER, " or", config.NAME, ".")
 
 def _price_url():
-    return vim.eval('g:price_url')
+    return vim.eval('g:vc_price_url')
 
 def _vs_currency():
-    return vim.eval('g:vs_currency')
+    return vim.eval('g:vc_vs_currency')
 
